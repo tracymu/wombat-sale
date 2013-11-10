@@ -1,5 +1,12 @@
 require 'wombat'
-#In terminal 'gem install wombat'
+# In terminal 'gem install wombat'
+require 'mail'
+# 'gem install mail'
+# So I can send an email
+
+# 
+end
+
 
 class RubyGemsScraper
   include Wombat::Crawler
@@ -22,10 +29,20 @@ price = results["price"]
 
 if price != "$230.00AU"
 	puts "It's changed!"
+	send_mail
+	# here I am trying to run my mail script (method?) below
 else 
 	puts "It's still $230. Boooo"
+	# no need to send email
 end
 
+
+send_mail = Mail.new do
+  from    'tracy@tracecode.com'
+  to      'tracy@moomumedia.com'
+  subject 'Price of Boots has changed!'
+  body    'Go check out the 2 Baia Vista Boots'
+end
 
 # By default, properties will return the text of the first matching element for the provided selector
 # If you want to retrieve all the matching elements, use the option :list
@@ -33,5 +50,3 @@ end
 
 #NEXT
 # make it so that if that new class appears, you can see it
-# make it so that it runs every day
-# make it so that it emails me when the change occurs
