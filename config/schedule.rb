@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.day, :at => '10:00 pm' do
-  command "path/to/wombat.rb"
+  rake "sale"
 end
