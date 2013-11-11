@@ -1,5 +1,9 @@
 require 'wombat'
-#In terminal 'gem install wombat'
+# In terminal 'gem install wombat'
+require 'mail'
+# 'gem install mail'
+# So I can send an email
+
 
 class RubyGemsScraper
   include Wombat::Crawler
@@ -20,10 +24,24 @@ results = RubyGemsScraper.new.crawl
 #I'm most interested in price, so saving that as a variable
 price = results["price"]
 
+# Now the method for being able to send an email. Using mail gem
+def send_mail
+	mail = Mail.new do
+	  from    'tracy@tracecode.com'
+	  to      'tracy@moomumedia.com'
+	  subject 'Price of Boots has changed!'
+	  body    'Go check out the 2 Baia Vista Boots'
+	end
+end
+
 if price != "$230.00AU"
 	puts "It's changed!"
+	send_mail
+	# here I am trying to run my mail script (method?) below
+	# but it's saying "undefined local variable or method `send_mail' for main:Object"
 else 
 	puts "It's still $230. Boooo"
+	# no need to send email
 end
 
 
@@ -33,5 +51,3 @@ end
 
 #NEXT
 # make it so that if that new class appears, you can see it
-# make it so that it runs every day
-# make it so that it emails me when the change occurs
