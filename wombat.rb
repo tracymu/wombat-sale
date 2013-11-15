@@ -25,10 +25,25 @@ results = RubyGemsScraper.new.crawl
 price = results["price"]
 
 # Now the method for being able to send an email. Using mail gem
+
+# to send out emails using SendGrid need to set up these defaults apparently
+# https://devcenter.heroku.com/articles/sendgrid#ruby-rails
+Mail.defaults do
+  delivery_method :smtp, {
+    :address => 'smtp.sendgrid.net',
+    :port => '587',
+    :domain => 'heroku.com',
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+end
+
 def send_mail
-	mail = Mail.new do
-	  from    'tracy@tracecode.com'
-	  to      'tracy@moomumedia.com'
+	mail = Mail.deliver do
+	  to    'tracy.musung@moomumedia.com'
+	  from	'tracy@moomumedia.com'
 	  subject 'Price of Boots has changed!'
 	  body    'Go check out the 2 Baia Vista Boots'
 	end
