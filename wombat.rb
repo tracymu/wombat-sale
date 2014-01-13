@@ -41,12 +41,14 @@ Mail.defaults do
 end
 
 def send_mail
-	mail = Mail.deliver do
+  #logger.info "Sending mail"
+	Mail.deliver do
+    from   'tracy.musung@moomumedia.com'
 	  to    'tracy.musung@moomumedia.com'
-	  from	'tracy@moomumedia.com'
 	  subject 'Price of Boots has changed!'
 	  body    'Go check out the 2 Baia Vista Boots'
 	end
+
 end
 
 if price != "$230.00AU"
@@ -56,7 +58,10 @@ if price != "$230.00AU"
 	# but it's saying "undefined local variable or method `send_mail' for main:Object"
 else 
 	puts "It's still $230. Boooo"
-	# no need to send email
+	send_mail
+
+  puts "This ran"
+  # no need to send email
 end
 
 
