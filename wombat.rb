@@ -46,21 +46,17 @@ def send_mail
     from   'tracy.musung@moomumedia.com'
 	  to    'tracy.musung@moomumedia.com'
 	  subject 'Price of Boots has changed!'
-	  body    'Go check out the 2 Baia Vista Boots'
+	  body    'Go check out the 2 Baia Vista Boots <a href="http://www.zomp.com.au/index.php/brand/2-baia-vista/2-baia-vista-311519-nero.html">at Zomp</a>'
 	end
 
 end
 
 if price != "$230.00AU"
-	puts "It's changed!"
 	send_mail
 	# here I am trying to run my mail script (method?) below
 	# but it's saying "undefined local variable or method `send_mail' for main:Object"
 else 
 	puts "It's still $230. Boooo"
-	send_mail
-
-  puts "This ran"
   # no need to send email
 end
 
